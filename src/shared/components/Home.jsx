@@ -30,7 +30,7 @@ function Home() {
             <section>
                 <div className="  sm:h-screen bg-cover bg-center " style={{ backgroundImage: " linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),url('/images/home.png')", }}>
                     <div className="flex justify-center items-center h-full px-4 ">
-                        <div className="max-w-[1300px] mx-auto flex flex-col justify-center items-center h-full lg:space-y-5 space-y-5 mt-20 ">
+                        <div className="max-w-[1300px] mx-auto flex flex-col justify-center items-center h-full lg:space-y-5 space-y-5 mt-32 md:mt-20 ">
                             <h1 className="text-white lg:text-6xl text-4xl text-center namdhinggo-bold">WELCOME TO <span className="text-[#fcac45]">ICCSI</span></h1>
                             <h2 className="text-white lg:text-4xl text-2xl namdhinggo-medium text-center">International Conference on Computer Science Innovations</h2>
                             <p className="text-white max-w-[1100px] mx-auto lg:text-lg text-base inter-medium text-justify leading-[30px]">A global platform for researchers, academicians, and industry experts to explore advancements in AI, Machine Learning, Cybersecurity, IoT, Blockchain, Cloud Computing, and Data Science, driving digital transformation and innovation.</p>

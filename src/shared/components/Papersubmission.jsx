@@ -162,9 +162,9 @@ function Papersubmission() {
                     <h2 className="text-[24px] md:text-[36px]  poppins-medium text-white lg:mt-10 mt-15">Paper Submission</h2>
                     <div className="flex space-x-2 ">
                         <Link to='/'>
-                            <h2 className=" text-[20px] poppins-medium text-white hover:text-[#fcac45] duration-300 ">Home</h2>
+                            <h2 className=" text-[18px] sm:text-[20px] poppins-medium text-white hover:text-[#fcac45] duration-300 ">Home</h2>
                         </Link>
-                        <div className="flex justify-center items-center gap-1">  <span className="text-white text-xl"><HiChevronDoubleRight /> </span><h2 className=" text-[20px] poppins-medium  text-[#fcac45] ">Paper Submission</h2></div>
+                        <div className="flex justify-center items-center gap-1">  <span className="text-white text-xl"><HiChevronDoubleRight /> </span><h2 className=" text-[18px] sm:text-[20px] poppins-medium  text-[#fcac45] ">Paper Submission</h2></div>
                     </div>
                 </div>
             </div>
