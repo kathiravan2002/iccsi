@@ -70,7 +70,7 @@ function Header() {
                 <div className={`flex justify-between   items-center  max-w-[1400px] mx-auto px-3 2xl:px-0 ${scroll ? '  ' : '  '} `}>
                     <Link to="/">
                         <div className="flex items-center justify-center  ">
-                            <img src="/images/iccsilogo.png" alt="" className="md:w-35 w-30 z-20" />
+                            <img src="/images/iccsilogo.png" alt="logo" className="md:w-35 w-30 z-20" loading='lazy'/>
                         </div>
                     </Link>
                     <div className="hidden lg:block w-full  ">
