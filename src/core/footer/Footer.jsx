@@ -24,7 +24,7 @@ const Footer = () => {
                 <li><Link to ="/" className="">Home</Link></li>
                 <li> <Link to='/about'>About the Conference</Link></li>
                 <li><Link to='/scope'>Scope</Link> </li>
-                <li><Link to='/organizing-committee'>Organization Committee</Link></li>
+                {/* <li><Link to='/organizing-committee'>Organization Committee</Link></li> */}
                 <li><Link to='/editorial-board'>Editorial Board</Link> </li>
               </ul>
             </div>

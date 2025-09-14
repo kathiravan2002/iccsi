@@ -1,4 +1,5 @@
 import React from 'react'
+import Marquee from 'react-fast-marquee';
 import { AiFillCalendar } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
@@ -24,7 +25,22 @@ function Home() {
         },
 
     ]
-    
+
+
+    const imageItems = [
+        { src: '/images/associates/1.png', },
+        { src: '/images/associates/2.jpg', },
+        { src: '/images/associates/3.jpg', },
+        { src: '/images/associates/4.jpg', },
+        { src: '/images/associates/5.jpg', },
+        { src: '/images/associates/6.jpg', },
+        { src: "/images/associates/scopus.png", },
+        { src: "/images/associates/8.jpg", },
+        { src: "/images/associates/9.jpg", },
+        { src: "/images/associates/10.jpg", },
+        { src: "/images/associates/11.jpg", },
+    ];
+
     return (
         <div >
             <section>
@@ -58,7 +74,7 @@ function Home() {
                     <div className="space-y-5 lg:space-y-0">
                         <h2 className="text-gray-800 poppins-semibold text-[34px] lg:text-start text-center">About <span className="text-[#fcac45]">Us</span></h2>
                         <div className=" flex items-center   justify-center max-w-[550px] mx-auto ">
-                            <img src="/images/about.png" alt="aboutus" className=" rounded-lg border-4 border-[#fcac45] block lg:hidden " loading='lazy'/>
+                            <img src="/images/about.png" alt="aboutus" className=" rounded-lg border-4 border-[#fcac45] block lg:hidden " loading='lazy' />
                         </div>
                         <div className="space-y-5">
                             <p className="text-lg inter-regular leading-[30px] opacity-85 text-justify">The International Conference on Computer Science Innovations  is a leading global platform that brings together researchers, academicians, and industry professionals to explore advancements in computing and technology. Covering fields such as Artificial Intelligence, Machine Learning, Cybersecurity, Cloud Computing, Blockchain, IoT, and Data Science, ICCSI fosters innovation and collaboration. </p>
@@ -81,7 +97,22 @@ function Home() {
                     ))}
                 </div>
             </section>
+            <div className="max-w-[1600px] mx-auto">
+                <div className=" pt-10 space-y-10   px-4">
+                <h2 className="text-gray-800 poppins-semibold text-[34px] text-center">Indexed <span className="text-[#fcac45] ">Journal</span></h2>
+                    <p className="text-center inter-medium opacity-85 text-[18px] leading-[30px] max-w-[1000px] mx-auto">The Selective accepted papers of our International Conference on Computer Science Innovations will be recommended to publish in the following index & publisher Journals.</p>
+                </div>
+                <Marquee direction='left' gradient pauseOnClick pauseOnHover>
+                    <div className="  flex  pb-10 pt-10 ">
+                        {imageItems.map((item, index) => (
+                            <div key={index} className=" flex justify-center mr-10  py-5" >
+                                <img src={item.src} alt="images" className=" w-[300px] rounded-lg shadow-[0_0_8px_rgba(0,0,0,0.15)] hover:shadow-[0_0_20px_rgba(0,0,0,0.15)] transition duratiom-300" />
+                            </div>
+                        ))}
+                    </div>
+                </Marquee>
 
+            </div>
 
         </div>
     )

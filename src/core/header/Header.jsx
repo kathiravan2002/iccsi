@@ -15,7 +15,14 @@ function Header() {
     const [dropdown1, setDropdown1] = useState(false);
     const [dropdown2, setDropdown2] = useState(false);
     const location = useLocation();
-    const isActive = location.pathname;
+    const [subDropdown, setSubDropdown] = useState(false);
+
+    const isActive = (path, includeHash = false) => {
+        const currentPath = includeHash
+            ? `${location.pathname}${location.hash}`
+            : location.pathname;
+        return currentPath === path;
+    };
     const ToggleMenu = () => {
         setMenuOpen(!MenuOpen);
     };
@@ -40,7 +47,31 @@ function Header() {
         };
     }, []);
 
+    useEffect(() => {
+        if (!dropdown1) setSubDropdown(false);
+    }, [dropdown1]);
 
+
+    const scrollToSection = (id) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
+    useEffect(() => {
+        if (location.hash) {
+            const id = location.hash.replace("#", "");
+            scrollToSection(id);
+        }
+    }, [location]);
+
+    const toggleSubDropdown = (index) => {
+        setSubDropdown((prev) => ({
+            ...prev,
+            [index]: !prev[index],
+        }));
+    };
     useEffect(() => {
         const handleScroll = () => {
             setScroll(window.scrollY > 10);
@@ -54,9 +85,15 @@ function Header() {
     const about = [
         { name: "About the Conference", path: "/about" },
         { name: "Scope of Conference", path: "/scope" },
-        { name: "Organizing Committee", path: "/organizing-committee" },
-        { name: "Editorial Board", path: "/editorial-board" },
-
+        // { name: "Organizing Committee", path: "/organizing-committee" },
+        {
+            name: "Editorial Board",
+            children: [
+                { name: "Organizing Committee", id: "organizing-committee", path: "/editorial-board" },
+                { name: "Technical Committee", id: "technical-committee", path: "/editorial-board" },
+                { name: "Advisory Committee", id: "advisory-committee", path: "/editorial-board" },
+            ]
+        }
     ];
     const author = [
         { name: "Conference Tracks", path: "/conference-tracks" },
@@ -70,33 +107,106 @@ function Header() {
                 <div className={`flex justify-between   items-center  max-w-[1400px] mx-auto px-3 2xl:px-0 ${scroll ? '  ' : '  '} `}>
                     <Link to="/">
                         <div className="flex items-center justify-center  ">
-                            <img src="/images/iccsilogo.png" alt="logo" className="md:w-35 w-30 z-20" loading='lazy'/>
+                            <img src="/images/iccsilogo.png" alt="logo" className="md:w-35 w-30 z-20" loading='lazy' />
                         </div>
                     </Link>
                     <div className="hidden lg:block w-full  ">
-                        <ul className={`flex justify-end gap-10 poppins-medium text-[18px] rounded-r-[15px]  text-white  ${scroll ? ' ' : ' '} `}>
+                        <ul className={`flex justify-end  items-center gap-10 poppins-medium text-[18px] rounded-r-[15px]  text-white  ${scroll ? ' ' : ' '} `}>
                             <li className="">
-                                <Link to='/' className={` ${isActive == '/' ? '' : '  '}`}>Home</Link>
+                                <Link to='/' className={`px-2 py-1 rounded-lg cursor-pointer ${isActive ( '/') ? 'text-black  bg-white' : '  '}`}>Home</Link>
                             </li>
-                            <li ref={dropdown1Ref} className="cursor-pointer relative"><Link onClick={() => setDropdown1(!dropdown1)} className={`flex items-center gap-1  ${about.some(link => location.pathname === link.path) ? '' : ''}`} >
-                                About Us
-                                <FaChevronDown className={`${dropdown1 ? 'rotate-180' : 'rotate-0'} duration-200 text-xs `} /> </Link>
-                                {dropdown1 &&
-                                    <div className={`absolute  border border-black  mt-3 rounded-lg text-black bg-white  ${scroll ? ' ' : ''}`}>
-                                        <ul className="p-2 text-[16px] max-w-none w-full whitespace-nowrap ">
+                            <li ref={dropdown1Ref} className="cursor-pointer relative">
+                                <button
+                                    onClick={() => setDropdown1(!dropdown1)}
+                                    className={`flex justify-between items-center px-2 py-1 rounded-lg cursor-pointer gap-1 ${about.some(link =>
+                                        link.children
+                                            ? link.children.some(sub => isActive(`${sub.path}#${sub.id}`, true))
+                                            : isActive(link.path)
+                                    )
+                                        ? 'text-black  bg-white'
+                                        : ''
+                                        }`}
+                                >
+                                    About Us
+                                    <FaChevronDown
+                                        className={`${dropdown1 ? 'rotate-180' : 'rotate-0'} duration-200 text-xs`}
+                                    />
+                                </button>
+                                {dropdown1 && (
+                                    <div
+                                        className={`absolute order border-black  mt-3 rounded-lg text-black bg-white  ${scroll ? '' : ''
+                                            }`}
+                                    >
+                                        <ul className="p-2 text-[16px] max-w-none w-full whitespace-nowrap">
                                             {about.map((link, index) => {
-                                                const isActive = location.pathname === link.path;
+                                                const isParentActive = link.children
+                                                    ? link.children.some(sub =>
+                                                        isActive(`${sub.path}#${sub.id}`, true)
+                                                    )
+                                                    : isActive(link.path);
 
                                                 return (
-                                                    <Link key={index} onClick={() => setDropdown1(!dropdown1)} to={link.path} className="!w-full" >
-                                                        <li className={`px-4 py-1.5 rounded-md transition cursor-pointer ${isActive ? '  ' : ''}`} >{link.name} </li>
-                                                    </Link>
+                                                    <li key={index} className="relative">
+                                                        {link.children ? (
+                                                            <>
+                                                                <button
+                                                                    onClick={() => toggleSubDropdown(index)}
+                                                                    className={`w-full flex justify-between items-center px-4 py-1.5 rounded-md cursor-pointer ${isParentActive ? 'bg-black  text-white' : ''
+                                                                        }`}
+                                                                >
+                                                                    {link.name}
+                                                                    <FaChevronDown
+                                                                        className={`${subDropdown[index] ? 'rotate-180' : 'rotate-0'
+                                                                            } text-xs`}
+                                                                    />
+                                                                </button>
+                                                                {subDropdown[index] && (
+                                                                    <ul className="ml-4 mt-1 rounded-lg border border-black pl-2 px-2 py-2">
+                                                                        {link.children.map((sub, subIndex) => {
+                                                                            const subPathWithHash = `${sub.path}#${sub.id}`;
+                                                                            const isSubActive = isActive(subPathWithHash, true);
+
+                                                                            return (
+                                                                                <li key={subIndex}>
+                                                                                    <Link
+                                                                                        to={subPathWithHash}
+                                                                                        onClick={() => {
+                                                                                            scrollToSection(sub.id);
+                                                                                            setDropdown1(false);
+                                                                                            toggleSubDropdown(index);
+                                                                                        }}
+                                                                                        className={`block px-4 py-1.5 rounded-md cursor-pointer ${isSubActive ? 'bg-black  text-white' : ''
+                                                                                            }`}
+                                                                                    >
+                                                                                        {sub.name}
+                                                                                    </Link>
+                                                                                </li>
+                                                                            );
+                                                                        })}
+                                                                    </ul>
+                                                                )}
+                                                            </>
+                                                        ) : (
+                                                            <Link
+                                                                to={link.path}
+                                                                onClick={() => {
+                                                                    setDropdown1(false);
+                                                                    setSubDropdown({});
+                                                                }}
+                                                                className={`block px-4 py-1.5 rounded-md cursor-pointer ${isActive(link.path) ? 'bg-black  text-white' : ''
+                                                                    }`}
+                                                            >
+                                                                {link.name}
+                                                            </Link>
+                                                        )}
+                                                    </li>
                                                 );
                                             })}
                                         </ul>
-                                    </div>}
+                                    </div>
+                                )}
                             </li>
-                            <li ref={dropdown2Ref} className="cursor-pointer relative"><Link onClick={() => setDropdown2(!dropdown2)} className={`flex items-center gap-1  ${author.some(link => location.pathname === link.path) ? '' : '   '}`}>Author’s Desk<FaChevronDown className={`${dropdown2 ? 'rotate-180' : 'rotate-0'} duration-200 text-xs `} /> </Link>
+                            <li ref={dropdown2Ref} className="cursor-pointer relative"><Link onClick={() => setDropdown2(!dropdown2)} className={`flex items-center gap-1 px-2 py-1 rounded-lg cursor-pointer ${author.some(link => location.pathname === link.path) ? 'text-black  bg-white' : '   '}`}>Author’s Desk<FaChevronDown className={`${dropdown2 ? 'rotate-180' : 'rotate-0'} duration-200 text-xs `} /> </Link>
                                 {dropdown2 &&
                                     <div className={`absolute  border border-black  mt-3 rounded-lg text-black bg-white    ${scroll ? ' ' : ' '}`}>
                                         <ul className="p-2 text-[16px] max-w-none w-full whitespace-nowrap ">
@@ -104,7 +214,7 @@ function Header() {
                                                 const isActive = location.pathname === link.path;
                                                 return (
                                                     <Link key={index} onClick={() => setDropdown2(!dropdown2)} to={link.path} className="!w-full" >
-                                                        <li className={`px-4 py-1.5 rounded-md transition cursor-pointer ${isActive ? ' ' : ''}`} >{link.name} </li>
+                                                        <li className={`px-4 py-2 rounded-md transition cursor-pointer ${isActive ? 'bg-black  text-white ' : ''}`} >{link.name} </li>
                                                     </Link>
                                                 )
                                             })}
@@ -114,7 +224,7 @@ function Header() {
 
 
                             <li >
-                                <Link to='/contact-us' className={` ${isActive == '/contact-us' ? ' ' : ' '}`}>Contact Us</Link>
+                                <Link to='/contact-us ' className={`px-2 py-1 rounded-lg cursor-pointer ${isActive('/contact-us') ? 'text-black  bg-white ' : ' '}`}>Contact Us</Link>
                             </li>
                         </ul>
                     </div>
