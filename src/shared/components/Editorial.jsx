@@ -320,12 +320,7 @@ function Editorial() {
             expertise: " Department of Digital Forensics & Cyber Security",
             country: " United Kingdom"
         },
-        {
-            name: "Dr.  Huiliang Zhao",
-            university: "Guizhou minzu University",
-            expertise: " Department of product design",
-            country: "China"
-        },
+       
         {
             name: "Dr. Saminda Premaratne",
             university: " University of Moratuwa",
