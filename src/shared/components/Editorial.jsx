@@ -253,12 +253,7 @@ function Editorial() {
             expertise: " Department of Information Technology",
             country: "Vietnam"
         },
-        {
-            name: "Dr. Stephen Obono Ekwe",
-            university: "  University of Cape Town",
-            expertise: " Department of Electrical Engineering",
-            country: " South Africa"
-        },
+        
         {
             name: "Dr. Saputra Hijrah",
             university: "Universitas Airlangga",
