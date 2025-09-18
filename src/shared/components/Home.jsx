@@ -98,12 +98,12 @@ function Home() {
                 </div>
             </section>
             <div className="max-w-[1450px] mx-auto">
-                <div className=" pt-10 space-y-10   px-4">
+                <div className="     px-4">
                 <h2 className="text-gray-800 poppins-semibold text-[34px] text-center">Indexed <span className="text-[#fcac45] ">Journals</span></h2>
-                    <p className="text-center inter-medium opacity-85 text-[18px] leading-[30px] max-w-[1000px] mx-auto">The Selective accepted papers of our International Conference on Computer Science Innovations will be recommended to publish in the following index & publisher Journals.</p>
+                    <p className="text-center inter-medium opacity-85 text-[18px] leading-[30px] max-w-[1000px] mx-auto mt-4">The Selective accepted papers of our International Conference on Computer Science Innovations will be recommended to publish in the following index & publisher Journals.</p>
                 </div>
                 <Marquee direction='left'  pauseOnClick pauseOnHover>
-                    <div className="  flex  pb-10 pt-10 ">
+                    <div className="  flex  pb-10 pt-5 ">
                         {imageItems.map((item, index) => (
                             <div key={index} className=" flex justify-center mr-10  py-5" >
                                 <img src={item.src} alt="images" className=" w-[300px] rounded-lg shadow-[0_0_8px_rgba(0,0,0,0.15)] hover:shadow-[0_0_20px_rgba(0,0,0,0.15)] transition duratiom-300" />
