@@ -11,27 +11,27 @@ function Datesandbank() {
     const dates = [
         {
             title: 'Abstract Submission Deadline',
-            date: '08-05-2025',
+            date: '12-12-2024',
         },
         {
             title: 'Full Paper Submission Deadline',
-            date: '12-05-2025',
+            date: '16-12-2024',
         },
         {
             title: 'Notification of Acceptance',
-            date: '19-05-2025',
+            date: '20-12-2024',
         },
         {
             title: 'Final Paper Submission',
-            date: '22-05-2025',
+            date: '27-12-2024',
         },
         {
             title: 'Registration Deadline',
-            date: '22-05-2025',
+            date: '02-01-2025',
         },
         {
             title: 'Conference Dates',
-            date: '28-05-2025',
+            date: '08-01-2025',
         },
     ];
     return (

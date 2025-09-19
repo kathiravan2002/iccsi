@@ -20,7 +20,7 @@ function Registerpage() {
           <div className="bg-white rounded-tr-[50px] rounded-bl-[50px] px-5 py-10 space-y-3 place-items-center group hover:-translate-y-2 duration-300  shadow-[0_0_10px_rgba(0,0,0,0.15)]">
             <div className="text-[48px] text-[#fcac45] flex shrink-0"><FaCalendarAlt /></div>
             <h2 className="namdhinggo-bold text-2xl">When</h2>
-            <p className="inter-medium text-xl text-center">26th May, 2025</p>
+            <p className="inter-medium text-xl text-center">08th January, 2025</p>
             <Link to="/paper-submission">
               <div className="bg-[#fcac45] rounded-lg  w-fit mx-auto hover:text-white duration-300 mt-5">
                 <button className='lg:text-lg text-base inter-bold py-2 px-4 cursor-pointer'>Register here </button>

@@ -9,19 +9,19 @@ function Home() {
     const date = [
         {
             title: "Abstract Submission Deadline",
-            date: "08-05-2025"
+            date: "12-12-2024"
         },
         {
             title: "Notification of Acceptance",
-            date: "19-05-2025"
+            date: "20-12-2024"
         },
         {
             title: "Conference Registration Deadline",
-            date: "22-05-2025"
+            date: "02-01-2024"
         },
         {
             title: "Conference Event Dates",
-            date: "28-05-2025"
+            date: "08-01-2025"
         },
 
     ]
