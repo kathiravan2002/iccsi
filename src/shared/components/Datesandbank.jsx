@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BsFillClockFill } from 'react-icons/bs';
 import { FaCalendar } from 'react-icons/fa';
 import { FaArrowRightLong, FaCalendarDays } from 'react-icons/fa6';
@@ -8,32 +8,56 @@ import { Calendar, Clock, MapPin, ArrowRight, CreditCard } from 'lucide-react';
 import { HiChevronDoubleRight } from 'react-icons/hi';
 
 function Datesandbank() {
-    const dates = [
-        {
-            title: 'Abstract Submission Deadline',
-            date: '12-12-2024',
-        },
-        {
-            title: 'Full Paper Submission Deadline',
-            date: '16-12-2024',
-        },
-        {
-            title: 'Notification of Acceptance',
-            date: '20-12-2024',
-        },
-        {
-            title: 'Final Paper Submission',
-            date: '27-12-2024',
-        },
-        {
-            title: 'Registration Deadline',
-            date: '02-01-2025',
-        },
-        {
-            title: 'Conference Dates',
-            date: '08-01-2025',
-        },
-    ];
+
+
+    const [activeYear, setActiveYear] = useState("2024");
+
+    const datesByYear = {
+        "2024": [
+            { title: "Abstract Submission Deadline", date: "15-11-2024" },
+            { title: "Full Paper Submission Deadline", date: "20-11-2024" },
+            { title: "Notification of Acceptance", date: "26-11-2024" },
+            { title: "Final Paper Submission", date: "02-12-2024" },
+            { title: "Registration Deadline", date: "06-12-2024" },
+            { title: "Conference Dates", date: "12-12-2024" },
+        ],
+        "2025": [
+            { title: "Abstract Submission Deadline", date: "14-12-2024" },
+            { title: "Full Paper Submission Deadline", date: "16-12-2024" },
+            { title: "Notification of Acceptance", date: "20-12-2024" },
+            { title: "Final Paper Submission", date: "27-12-2024" },
+            { title: "Registration Deadline", date: "02-01-2025" },
+            { title: "Conference Dates", date: "08-01-2025" },
+        ],
+    };
+
+
+    // const dates = [
+    //     {
+    //         title: 'Abstract Submission Deadline',
+    //         date: '12-12-2024',
+    //     },
+    //     {
+    //         title: 'Full Paper Submission Deadline',
+    //         date: '16-12-2024',
+    //     },
+    //     {
+    //         title: 'Notification of Acceptance',
+    //         date: '20-12-2024',
+    //     },
+    //     {
+    //         title: 'Final Paper Submission',
+    //         date: '27-12-2024',
+    //     },
+    //     {
+    //         title: 'Registration Deadline',
+    //         date: '02-01-2025',
+    //     },
+    //     {
+    //         title: 'Conference Dates',
+    //         date: '08-01-2025',
+    //     },
+    // ];
     return (
         <div>
             <div className="lg:h-90 h-70   relative bg-cover bg-center " style={{ backgroundImage: "url('/images/banner.png')" }}>
@@ -54,16 +78,37 @@ function Datesandbank() {
 
             <section className="2xl:px-0 px-4 lg:py-15 py-10 max-w-[800px]  mx-auto ">
                 <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-[#1e1b4b]">Important Dates</h2>
-                <div className="space-y-4 ">
-                    {dates.map((item, index) => (
-                        <div
-                            key={index}
-                            className="flex group hover:-translate-y-1 duration-300 lg:justify-between flex-col lg:flex-row gap-5 lg:gap-0 items-center bg-gray-100 rounded-md p-4 md:px-20 shadow-sm"
-                        >
-                            <div className="text-base md:text-lg poppins-medium text-[#1e1b4b]">{item.title}</div>
-                            <div className="text-base md:text-lg poppins-semibold text-[#1e1b4b]">{item.date}</div>
-                        </div>
-                    ))}
+                <div className=" space-y-6">
+                    <div className="flex justify-center gap-4 mb-4">
+                        {Object.keys(datesByYear).map((year) => (
+                            <button
+                                key={year}
+                                onClick={() => setActiveYear(year)}
+                                className={`px-5 py-2 rounded-md text-lg poppins-semibold transition cursor-pointer ${activeYear === year
+                                    ? "bg-[#1e1b4b] text-white"
+                                    : "bg-gray-200 text-[#1e1b4b] hover:bg-gray-300"
+                                    }`}
+                            >
+                                {year}
+                            </button>
+                        ))}
+                    </div>
+
+                    <div className="space-y-4">
+                        {datesByYear[activeYear].map((item, index) => (
+                            <div
+                                key={index}
+                                className="flex group hover:-translate-y-1 duration-300 lg:justify-between flex-col lg:flex-row gap-5 lg:gap-0 items-center bg-gray-100 rounded-md p-4 md:px-20 shadow-sm"
+                            >
+                                <div className="text-base md:text-lg poppins-medium text-[#1e1b4b]">
+                                    {item.title}
+                                </div>
+                                <div className="text-base md:text-lg poppins-semibold text-[#1e1b4b]">
+                                    {item.date}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
 

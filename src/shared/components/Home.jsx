@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Marquee from 'react-fast-marquee';
 import { AiFillCalendar } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
@@ -6,26 +6,41 @@ import { Link } from 'react-router-dom';
 
 function Home() {
 
-    const date = [
-        {
-            title: "Abstract Submission Deadline",
-            date: "12-12-2024"
-        },
-        {
-            title: "Notification of Acceptance",
-            date: "20-12-2024"
-        },
-        {
-            title: "Conference Registration Deadline",
-            date: "02-01-2024"
-        },
-        {
-            title: "Conference Event Dates",
-            date: "08-01-2025"
-        },
+    // const date = [
+    //     {
+    //         title: "Abstract Submission Deadline",
+    //         date: "12-12-2024"
+    //     },
+    //     {
+    //         title: "Notification of Acceptance",
+    //         date: "20-12-2024"
+    //     },
+    //     {
+    //         title: "Conference Registration Deadline",
+    //         date: "02-01-2024"
+    //     },
+    //     {
+    //         title: "Conference Event Dates",
+    //         date: "08-01-2025"
+    //     },
 
-    ]
+    // ]
+    const [activeYear, setActiveYear] = useState("2025");
 
+    const dataByYear = {
+        "2025": [
+            { title: "Abstract Submission Deadline", date: "12-12-2024" },
+            { title: "Notification of Acceptance", date: "20-12-2024" },
+            { title: "Conference Registration Deadline", date: "02-01-2024" },
+            { title: "Conference Event Dates", date: "08-01-2025" },
+        ],
+        "2024": [
+            { title: "Abstract Submission Deadline", date: "15-11-2024" },
+            { title: "Notification of Acceptance", date: "26-11-2024" },
+            { title: "Conference Registration Deadline", date: "06-12-2024" },
+            { title: "Conference Event Dates", date: "12-12-2025" },
+        ],
+    };
 
     const imageItems = [
         { src: '/images/associates/1.png', },
@@ -86,7 +101,7 @@ function Home() {
 
             <section id="dates" className="max-w-[1400px] mx-auto 2xl:px-0 px-4 lg:pb-15 pb-10 scroll-mt-30">
                 <h2 className="text-gray-800 poppins-semibold text-[34px] text-center">Take a look at <span className="text-[#fcac45] ">our key dates</span></h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-7">
+                {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-7">
                     {date.map((item, index) => (
                         <div key={index} className={`group hover:-translate-y-2 duration-300 cursor-pointer shadow-[0_0_10px_rgba(0,0,0,0.15)] rounded-tr-[50px] rounded-bl-[50px] border-2 border-[#fcac45] py-10 px-5 space-y-5 ${index % 2 === 1 ? 'bg-[#fcac45]' : ''}`}>
                             <div className={`text-[36px]  flex shrink-0 justify-center ${index % 2 === 1 ? '' : 'text-[#fcac45]'}`}><AiFillCalendar /></div>
@@ -95,14 +110,57 @@ function Home() {
                             <p className="xl:text-[26px] text-[24px] inter-semibold text-center">{item.date}</p>
                         </div>
                     ))}
+                </div> */}
+                <div className=" mt-10">
+                    <div className="flex justify-center mb-6">
+                        {Object.keys(dataByYear).map((year) => (
+                            <button
+                                key={year}
+                                onClick={() => setActiveYear(year)}
+                                className={`px-5 py-2 mx-2 rounded-lg text-lg poppins-semibold transition  cursor-pointer ${activeYear === year
+                                    ? "bg-[#fcac45] text-white"
+                                    : "bg-gray-200 text-[#fcac45] hover:bg-gray-300"
+                                    }`}
+                            >
+                                {year}
+                            </button>
+                        ))}
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-7">
+                        {dataByYear[activeYear].map((item, index) => (
+                            <div
+                                key={index}
+                                className={`group hover:-translate-y-2 duration-300 cursor-pointer shadow-[0_0_10px_rgba(0,0,0,0.15)] rounded-tr-[50px] rounded-bl-[50px] border-2 border-[#fcac45] py-10 px-5 space-y-5 ${index % 2 === 1 ? "bg-[#fcac45]" : ""
+                                    }`}
+                            >
+                                <div
+                                    className={`text-[36px] flex shrink-0 justify-center ${index % 2 === 1 ? "" : "text-[#fcac45]"
+                                        }`}
+                                >
+                                    <AiFillCalendar />
+                                </div>
+                                <p className="xl:text-[22px] text-[18px] inter-semibold text-center">
+                                    {item.title}
+                                </p>
+                                <hr
+                                    className={`max-w-40 mx-auto ${index % 2 === 1 ? "" : "text-[#fcac45]"
+                                        }`}
+                                />
+                                <p className="xl:text-[26px] text-[24px] inter-semibold text-center">
+                                    {item.date}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
             <div className="max-w-[1450px] mx-auto">
                 <div className="     px-4">
-                <h2 className="text-gray-800 poppins-semibold text-[34px] text-center">Indexed <span className="text-[#fcac45] ">Journals</span></h2>
+                    <h2 className="text-gray-800 poppins-semibold text-[34px] text-center">Indexed <span className="text-[#fcac45] ">Journals</span></h2>
                     <p className="text-center inter-medium opacity-85 text-[18px] leading-[30px] max-w-[1000px] mx-auto mt-4">The Selective accepted papers of our International Conference on Computer Science Innovations will be recommended to publish in the following index & publisher Journals.</p>
                 </div>
-                <Marquee direction='left'  pauseOnClick pauseOnHover>
+                <Marquee direction='left' pauseOnClick pauseOnHover>
                     <div className="  flex  pb-10 pt-5 ">
                         {imageItems.map((item, index) => (
                             <div key={index} className=" flex justify-center mr-10  py-5" >
